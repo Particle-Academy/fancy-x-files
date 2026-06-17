@@ -1,0 +1,72 @@
+{
+    "name": "particle-academy/fancy-x-files",
+    "description": "Headless manager for the well-known files every modern web app owes bots AND agents — robots.txt, .well-known/security.txt, llms.txt, humans.txt, sitemap.xml, and an agents/AI manifest. Define them once in code/config and serve them consistently. Zero runtime deps; ships a default-open robots evaluator so scrapers can honor robots honestly, and makes it hard to leak a protected path. Framework-agnostic core + Laravel adapter.",
+    "type": "library",
+    "version": "0.1.0",
+    "keywords": [
+        "robots-txt",
+        "security-txt",
+        "llms-txt",
+        "humans-txt",
+        "sitemap",
+        "well-known",
+        "agents",
+        "ai",
+        "crawlability",
+        "laravel",
+        "particle-academy"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/Particle-Academy/fancy-x-files",
+    "support": {
+        "issues": "https://github.com/Particle-Academy/fancy-x-files/issues",
+        "source": "https://github.com/Particle-Academy/fancy-x-files"
+    },
+    "repository": {
+        "type": "vcs",
+        "url": "https://github.com/Particle-Academy/fancy-x-files"
+    },
+    "authors": [
+        {
+            "name": "Particle Academy",
+            "homepage": "https://github.com/Particle-Academy"
+        }
+    ],
+    "require": {
+        "php": "^8.2"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.26",
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "pestphp/pest": "^3.0|^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ParticleAcademy\\XFiles\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ParticleAcademy\\XFiles\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "pest",
+        "lint": "pint --test"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ParticleAcademy\\XFiles\\Laravel\\XFilesServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
