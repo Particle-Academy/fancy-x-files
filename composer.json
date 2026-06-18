@@ -2,7 +2,7 @@
     "name": "particle-academy/fancy-x-files",
     "description": "Headless manager for the well-known files every modern web app owes bots AND agents — robots.txt, .well-known/security.txt, llms.txt, humans.txt, sitemap.xml, and an agents/AI manifest. Define them once in code/config and serve them consistently. Zero runtime deps; ships a default-open robots evaluator so scrapers can honor robots honestly, and makes it hard to leak a protected path. Framework-agnostic core + Laravel adapter.",
     "type": "library",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "keywords": [
         "robots-txt",
         "security-txt",

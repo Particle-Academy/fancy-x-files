@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Facades\Route;
 use ParticleAcademy\XFiles\Files\LlmsTxt;
 use ParticleAcademy\XFiles\Files\RobotsTxt;
 use ParticleAcademy\XFiles\Files\SecurityTxt;
 use ParticleAcademy\XFiles\Files\Sitemap;
+use ParticleAcademy\XFiles\Laravel\Http\ServeWellKnownFile;
 use ParticleAcademy\XFiles\Registry;
 
 beforeEach(function (): void {
@@ -63,6 +65,20 @@ it('serves sitemap.xml as application/xml', function (): void {
 
 it('serves llms.txt', function (): void {
     $this->get('/llms.txt')->assertOk()->assertSee('# Example', false);
+});
+
+it('registers cacheable class-string route actions (no closures)', function (): void {
+    // Closures capturing the container fail route:cache with
+    // "Serialization of 'WeakMap' is not allowed". Every x-files route must use
+    // a class-string action so `php artisan route:cache` / optimize can serialize it.
+    $xfiles = collect(Route::getRoutes()->getRoutes())
+        ->filter(fn ($route): bool => str_starts_with((string) $route->getName(), 'x-files.'));
+
+    expect($xfiles)->not->toBeEmpty();
+
+    $xfiles->each(function ($route): void {
+        expect($route->getActionName())->toBe(ServeWellKnownFile::class);
+    });
 });
 
 it('applies cache headers', function (): void {

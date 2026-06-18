@@ -7,6 +7,7 @@ namespace ParticleAcademy\XFiles\Laravel;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use ParticleAcademy\XFiles\Laravel\Console\CheckCommand;
+use ParticleAcademy\XFiles\Laravel\Http\ServeWellKnownFile;
 use ParticleAcademy\XFiles\Registry;
 
 /**
@@ -59,27 +60,15 @@ final class XFilesServiceProvider extends ServiceProvider
 
         /** @var Registry $registry */
         $registry = $this->app->make(Registry::class);
-        $app = $this->app;
 
         foreach ($registry->all() as $file) {
             $path = ltrim($file->path(), '/');
 
-            // The closure resolves the file + cache config at REQUEST time, so the
-            // served body always reflects the current Registry rather than a copy
-            // snapshotted at boot.
-            Route::get($path, function () use ($app, $file): mixed {
-                /** @var Registry $registry */
-                $registry = $app->make(Registry::class);
-                $served = $registry->get($file->path()) ?? $file;
-                $cache = (int) $app['config']->get('x-files.cache', 3600);
-
-                $headers = ['Content-Type' => $served->contentType()];
-                if ($cache > 0) {
-                    $headers['Cache-Control'] = 'public, max-age='.$cache;
-                }
-
-                return response($served->render(), 200, $headers);
-            })->name('x-files.'.str_replace(['/', '.'], ['-', '-'], $path));
+            // A class-string action (not a closure) so `route:cache` / `optimize`
+            // can serialize it. The controller re-resolves the file + cache config
+            // at REQUEST time from the live Registry, matching the request path.
+            Route::get($path, ServeWellKnownFile::class)
+                ->name('x-files.'.str_replace(['/', '.'], ['-', '-'], $path));
         }
     }
 }
