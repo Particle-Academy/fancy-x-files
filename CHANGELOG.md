@@ -17,6 +17,25 @@ upgrading.
 
 ## 0.2.0 — 2026-08-07
 
+### Fixed
+
+- **The package could not publish to Packagist at all.** `composer.json` carried
+  two long-standing errors that `composer validate` flags as publish errors:
+
+  - a hardcoded `"version": "0.1.1"`. Packagist uses that field in preference to
+    the git tag, so every release published as whatever the field said rather
+    than what was tagged — which is why the registry listed `0.1.1` / `0.1.0`
+    while the repo's tags were `v0.1.1` / `v0.1.0`, and why tagging a new
+    version changed nothing.
+  - a stray top-level `"repository"` key. The schema defines `repositories`
+    (plural, an array); an unknown top-level property is rejected outright.
+
+  Both are removed. The version now comes from the tag, which is what every
+  other package in the kit already does.
+
+  **What you must do:** nothing. This only affects whether releases reach the
+  registry.
+
 ### Changed
 
 - **BREAKING — PHP 8.2 is no longer supported.** `require.php` moves from `^8.2` to `^8.4`.
