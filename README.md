@@ -1,12 +1,14 @@
 # fancy-x-files
 
+[![Fancified](art/fancified.svg)](https://particle.academy)
+
 Headless manager for the **well-known files** every modern web app owes both
 bots *and* agents — `robots.txt`, `.well-known/security.txt`, `llms.txt`,
 `humans.txt`, `sitemap.xml`, and an agents/AI manifest. Define them **once** in
 code or config, serve them consistently, and validate them in CI.
 
 - **Zero runtime dependencies.** The core (`ParticleAcademy\XFiles\`) is plain
-  PHP 8.2+. The Laravel adapter is optional and auto-discovered.
+  PHP 8.4+. The Laravel adapter is optional and auto-discovered.
 - **A default-open robots evaluator** (`RobotsPolicy`) so your scraper can
   *honor* a target site's robots.txt with correct precedence — the same honest
   implementation everywhere.
