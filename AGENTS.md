@@ -13,7 +13,8 @@ composer require particle-academy/fancy-x-files
 - **PHP:** `^8.4`. Zero runtime dependencies.
 - In Laravel the service provider auto-discovers. Publish the config with
   `php artisan vendor:publish --tag=x-files-config`.
-- The Node / TypeScript twin is `@particle-academy/fancy-x-files-js`; editors
+- The Node / TypeScript twin is `@particle-academy/fancy-x-files` on npm (repo
+  `fancy-x-files-js`); editors
   for these files are in `@particle-academy/fancy-x-files-ui`.
 
 ## Find it on the Fancy MCP server
