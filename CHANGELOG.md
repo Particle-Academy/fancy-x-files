@@ -15,6 +15,8 @@ upgrading.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-19
+
 ### Changed
 
 - **BREAKING:** Laravel 13 is the minimum; an app on Laravel 12 or older can no
