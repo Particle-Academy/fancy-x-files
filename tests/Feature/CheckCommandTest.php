@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Facades\Artisan;
 use ParticleAcademy\XFiles\Files\RobotsTxt;
 use ParticleAcademy\XFiles\Files\SecurityTxt;
 use ParticleAcademy\XFiles\Registry;
@@ -14,8 +15,7 @@ it('passes x-files:check on a valid set', function (): void {
     });
     $this->app->forgetInstance(Registry::class);
 
-    $this->artisan('x-files:check')
-        ->assertExitCode(0);
+    expect(Artisan::call('x-files:check'))->toBe(0);
 });
 
 it('fails x-files:check when a file is invalid', function (): void {
@@ -25,6 +25,5 @@ it('fails x-files:check when a file is invalid', function (): void {
     });
     $this->app->forgetInstance(Registry::class);
 
-    $this->artisan('x-files:check')
-        ->assertExitCode(1);
+    expect(Artisan::call('x-files:check'))->toBe(1);
 });
