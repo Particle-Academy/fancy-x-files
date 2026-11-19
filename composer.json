@@ -35,6 +35,10 @@
         "laravel/pint": "^1.26",
         "pestphp/pest": "^5.0"
     },
+    "conflict": {
+        "laravel/framework": "<13.0",
+        "illuminate/support": "<13.0"
+    },
     "autoload": {
         "psr-4": {
             "ParticleAcademy\\XFiles\\": "src/"
